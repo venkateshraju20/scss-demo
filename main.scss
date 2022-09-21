@@ -1,0 +1,104 @@
+@import "_variables.scss";
+@import "typography.scss";
+
+@mixin display-flex() {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: $display-default;
+}
+
+@mixin media-query-width($width) {
+  @media (min-width: $width) {
+    @content;
+  }
+}
+
+html {
+  font-size: 94.75%;
+
+  @include media-query-width(40em) {
+    font-size: 125%;
+  }
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+.container {
+  @include display-flex();
+  flex : {
+    direction: column;
+    wrap: nowrap;
+  }
+  align-items: center;
+  padding: $padding-half;
+  box-sizing: $box-size-default;
+}
+
+.sass-section {
+  border: $border-default;
+  background: lighten(map-get($colors, main), 72%);
+  padding: $size-default * 2;
+  text-align: $text-align-default;
+  width: $width-percent;
+  box-sizing: $box-size-default;
+}
+
+.sass-introduction {
+  @extend .sass-section;
+  box-shadow: $size-tiny $size-tiny $size-tiny/2 #ccc;
+  @include media-query-width(40em) {
+    width: 30rem;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.sass-details {
+  margin: $size-default * 2 0;
+  @extend .sass-section;
+  @include media-query-width(40em) {
+    width: 30rem;
+  }
+}
+
+.section-header {
+  border-bottom: $border-default;
+
+  h1 {
+    margin: 0 0 $size-default 0;
+  }
+}
+
+.documentation-links {
+  @include display-flex();
+  list-style: none;
+  margin: $size-default 0 0 0;
+  padding: 0;
+  flex-direction: column;
+
+  li {
+    margin: $size-tiny 0;
+    background: map-get($colors, default);
+  }
+
+  .documentation-link {
+    text-decoration: none;
+    color: map-get($colors, main);
+    display: block;
+    padding: $size-tiny;
+    border: $border-default;
+
+    &:hover,
+    &:active {
+      color: map-get($colors, default);
+      background: map-get($colors, secondary);
+      border-color: map-get($colors, secondary);
+    }
+  }
+}
